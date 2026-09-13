@@ -47,25 +47,26 @@
       color: var(--texto);
       min-height: 100vh;
       padding: calc(16px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
-      line-height: 1.55;
+      line-height: 1.7;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
+    /* ===== HEADER ===== */
     header {
       text-align: center;
-      padding: 18px 10px 24px;
+      padding: 18px 10px 22px;
       animation: aparecer 0.6s ease both;
     }
 
     header .logo {
-      width: 66px; height: 66px;
+      width: 78px; height: 78px;
       margin: 0 auto 14px;
-      border-radius: 20px;
+      border-radius: 22px;
       background: var(--gradiente);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 2.4rem;
       box-shadow: var(--sombra);
       animation: flotar 3s ease-in-out infinite;
     }
@@ -76,7 +77,7 @@
     }
 
     header h1 {
-      font-size: 1.7rem;
+      font-size: 1.9rem;
       font-weight: 700;
       background: var(--gradiente);
       -webkit-background-clip: text;
@@ -87,15 +88,55 @@
 
     header p {
       color: var(--texto-suave);
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 500;
     }
 
+    /* ===== BARRA DE PROGRESO ===== */
+    .progreso {
+      max-width: 100%;
+      height: 6px;
+      background: rgba(37, 99, 235, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 6px 0 16px;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .progreso .barra {
+      height: 100%;
+      width: 20%;
+      background: var(--gradiente);
+      border-radius: 10px;
+      transition: width 0.45s ease;
+    }
+
+    /* ===== INDICADOR SECCIÓN ===== */
+    .indicador {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--texto-suave);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .indicador .num {
+      color: var(--azul);
+      font-weight: 700;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .indicador .num { color: #8ab4ff; }
+    }
+
+    /* ===== PESTAÑAS HORIZONTALES ===== */
     .opciones {
       display: flex;
       gap: 10px;
       overflow-x: auto;
-      padding: 4px 2px 16px;
+      padding: 4px 2px 18px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type: x proximity;
@@ -111,9 +152,9 @@
       -webkit-backdrop-filter: blur(12px);
       border: 2px solid var(--borde);
       border-radius: 30px;
-      padding: 11px 18px;
+      padding: 12px 20px;
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.98rem;
       font-weight: 600;
       color: var(--texto);
       white-space: nowrap;
@@ -131,26 +172,27 @@
       box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
     }
 
+    /* ===== PANEL ===== */
     .panel {
       background: var(--tarjeta);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--borde);
       border-radius: 20px;
-      padding: 22px;
+      padding: 26px 24px;
       box-shadow: var(--sombra);
-      min-height: 180px;
+      min-height: 200px;
     }
 
     .panel.reflow { animation: aparecer 0.4s ease both; }
 
     .panel h2 {
-      font-size: 1.25rem;
+      font-size: 1.45rem;
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       color: var(--azul);
     }
 
@@ -160,20 +202,22 @@
 
     .panel p, .panel li {
       color: var(--texto-suave);
-      font-size: 0.98rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
     }
 
-    .panel ul { padding-left: 20px; margin: 8px 0 12px; }
-    .panel li { margin-bottom: 8px; }
+    .panel strong { color: var(--texto); font-weight: 600; }
+
+    .panel ul { padding-left: 22px; margin: 10px 0 14px; }
+    .panel li { margin-bottom: 10px; }
 
     .panel code {
       background: rgba(37, 99, 235, 0.1);
       color: var(--azul);
-      padding: 2px 6px;
+      padding: 3px 7px;
       border-radius: 6px;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       font-family: 'Courier New', monospace;
     }
 
@@ -181,47 +225,51 @@
       .panel code { color: #8ab4ff; background: rgba(138, 180, 255, 0.15); }
     }
 
+    /* ===== DATO CLAVE ===== */
     .dato {
       background: var(--gradiente);
       color: #fff;
-      padding: 14px 18px;
+      padding: 16px 20px;
       border-radius: 14px;
-      margin: 14px 0;
+      margin: 16px 0;
       font-weight: 600;
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       box-shadow: var(--sombra);
+      line-height: 1.5;
     }
 
-    .dato span { font-size: 1.4rem; flex-shrink: 0; }
+    .dato span { font-size: 1.6rem; flex-shrink: 0; }
 
-    /* Flujo paso a paso */
+    /* ===== PASOS NUMERADOS ===== */
     .pasos {
       counter-reset: paso;
       list-style: none;
       padding: 0;
-      margin: 12px 0;
+      margin: 14px 0;
     }
 
     .pasos li {
       counter-increment: paso;
       position: relative;
-      padding-left: 40px;
-      margin-bottom: 10px;
+      padding-left: 46px;
+      margin-bottom: 14px;
       color: var(--texto-suave);
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
 
     .pasos li::before {
       content: counter(paso);
       position: absolute;
       left: 0; top: 0;
-      width: 26px; height: 26px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       background: var(--gradiente);
       color: #fff;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -229,41 +277,99 @@
       box-shadow: 0 3px 8px rgba(124, 58, 237, 0.3);
     }
 
+    /* ===== ARQUITECTURA ===== */
     .arquitectura {
       background: rgba(37, 99, 235, 0.08);
       border-left: 4px solid var(--azul);
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-radius: 10px;
       font-family: 'Courier New', monospace;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       color: var(--texto);
-      margin: 12px 0;
-      line-height: 1.7;
+      margin: 14px 0;
+      line-height: 1.8;
       overflow-x: auto;
+      font-weight: 500;
     }
 
     @media (prefers-color-scheme: dark) {
       .arquitectura { background: rgba(138, 180, 255, 0.1); }
     }
 
+    /* ===== CHECKS ===== */
     .check {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 14px;
       color: var(--texto-suave);
-      font-size: 0.95rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
 
     .check .icono-check {
       color: var(--verde);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       flex-shrink: 0;
-      line-height: 1.4;
+      line-height: 1.3;
     }
 
     .check strong { color: var(--texto); font-weight: 600; }
 
+    /* ===== BOTONES ANTERIOR / SIGUIENTE ===== */
+    .navegacion {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .navegacion button {
+      flex: 1;
+      padding: 16px 14px;
+      border: none;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .navegacion .btn-prev {
+      background: var(--tarjeta);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid var(--borde);
+      color: var(--texto);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .navegacion .btn-prev:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .navegacion .btn-next {
+      background: var(--gradiente);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+    }
+
+    .navegacion .btn-next:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .navegacion button:not(:disabled):active {
+      transform: scale(0.96);
+    }
+
+    /* ===== BOTÓN VOLVER ARRIBA ===== */
     .arriba {
       position: fixed;
       right: 18px;
@@ -285,15 +391,17 @@
     .arriba.visible { opacity: 1; pointer-events: auto; }
     .arriba:active { transform: scale(0.9); }
 
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       color: var(--texto-suave);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       margin-top: 26px;
       padding-bottom: 10px;
       font-weight: 500;
     }
 
+    /* ===== ANIMACIONES ===== */
     @keyframes aparecer {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -308,7 +416,14 @@
     <p>Plataforma web de inteligencia artificial</p>
   </header>
 
-  <nav class="opciones">
+  <!-- Barra de progreso -->
+  <div class="progreso"><div class="barra" id="barraProgreso"></div></div>
+
+  <!-- Indicador de sección -->
+  <div class="indicador">Sección <span class="num" id="numActual">1</span> de <span class="num" id="numTotal">5</span></div>
+
+  <!-- Pestañas horizontales -->
+  <nav class="opciones" id="tabs">
     <button class="activo" onclick="mostrar(this,'intro')">🏠 Introducción</button>
     <button onclick="mostrar(this,'objetivos')">🎯 Objetivos</button>
     <button onclick="mostrar(this,'funcionamiento')">⚙️ Funcionamiento</button>
@@ -316,14 +431,21 @@
     <button onclick="mostrar(this,'conclusion')">🏁 Conclusión</button>
   </nav>
 
+  <!-- Panel -->
   <main class="panel" id="panel"></main>
+
+  <!-- Botones Anterior / Siguiente -->
+  <div class="navegacion">
+    <button class="btn-prev" id="btnPrev" onclick="anterior()">◀ Anterior</button>
+    <button class="btn-next" id="btnNext" onclick="siguiente()">Siguiente ▶</button>
+  </div>
 
   <button class="arriba" id="btnArriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <footer>© 2025 Innovatech Chat · Proyecto informativo</footer>
 
   <script>
-    /* ===== CONTENIDO REAL DEL PROYECTO ===== */
+    /* ===== CONTENIDO DEL PROYECTO ===== */
     const datos = {
       intro: `
         <h2>🏠 Introducción</h2>
@@ -385,29 +507,85 @@
       `
     };
 
+    /* ===== ORDEN DE SECCIONES ===== */
+    const orden = ['intro', 'objetivos', 'funcionamiento', 'resultados', 'conclusion'];
+    let actual = 0;
+
+    /* ===== MOSTRAR SECCIÓN ===== */
     function mostrar(boton, clave) {
-      if (navigator.vibrate) navigator.vibrate(10);
+      if (navigator.vibrate) navigator.vibrate(8);
+
+      // Actualizar índice
+      actual = orden.indexOf(clave);
+      if (actual < 0) actual = 0;
+
+      // Marcar botón activo
       document.querySelectorAll('.opciones button').forEach(b => b.classList.remove('activo'));
-      boton.classList.add('activo');
+      if (boton) boton.classList.add('activo');
+
+      // Guardar
       try { localStorage.setItem('pestanaActiva', clave); } catch(e) {}
 
+      // Mostrar contenido con animación
       const panel = document.getElementById('panel');
       panel.innerHTML = datos[clave];
       panel.classList.remove('reflow');
       void panel.offsetWidth;
       panel.classList.add('reflow');
 
-      boton.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      // Actualizar indicador, barra y botones
+      actualizarUI();
+
+      // Centrar botón activo
+      if (boton) boton.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+      // Scroll al inicio del panel
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    /* ===== ACTUALIZAR UI ===== */
+    function actualizarUI() {
+      // Indicador
+      document.getElementById('numActual').textContent = actual + 1;
+      document.getElementById('numTotal').textContent = orden.length;
+
+      // Barra de progreso
+      const porcentaje = ((actual + 1) / orden.length) * 100;
+      document.getElementById('barraProgreso').style.width = porcentaje + '%';
+
+      // Botones
+      document.getElementById('btnPrev').disabled = actual === 0;
+      document.getElementById('btnNext').disabled = actual === orden.length - 1;
+    }
+
+    /* ===== NAVEGACIÓN ===== */
+    function anterior() {
+      if (actual > 0) {
+        const clave = orden[actual - 1];
+        const botones = document.querySelectorAll('.opciones button');
+        mostrar(botones[actual - 1], clave);
+      }
+    }
+
+    function siguiente() {
+      if (actual < orden.length - 1) {
+        const clave = orden[actual + 1];
+        const botones = document.querySelectorAll('.opciones button');
+        mostrar(botones[actual + 1], clave);
+      }
+    }
+
+    /* ===== CARGA INICIAL ===== */
     window.addEventListener('DOMContentLoaded', () => {
       const botones = document.querySelectorAll('.opciones button');
       let clave = 'intro';
       try { clave = localStorage.getItem('pestanaActiva') || 'intro'; } catch(e) {}
-      const idx = Object.keys(datos).indexOf(clave);
-      mostrar(botones[idx >= 0 ? idx : 0], datos[clave] ? clave : 'intro');
+      const idx = orden.indexOf(clave);
+      actual = idx >= 0 ? idx : 0;
+      mostrar(botones[actual], orden[actual]);
     });
 
+    /* ===== BOTÓN VOLVER ARRIBA ===== */
     const btnArriba = document.getElementById('btnArriba');
     window.addEventListener('scroll', () => {
       btnArriba.classList.toggle('visible', window.scrollY > 200);
