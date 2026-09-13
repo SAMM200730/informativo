@@ -51,7 +51,6 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* ===== HEADER ===== */
     header {
       text-align: center;
       padding: 18px 10px 22px;
@@ -416,13 +415,10 @@
     <p>Plataforma web de inteligencia artificial</p>
   </header>
 
-  <!-- Barra de progreso -->
   <div class="progreso"><div class="barra" id="barraProgreso"></div></div>
 
-  <!-- Indicador de sección -->
   <div class="indicador">Sección <span class="num" id="numActual">1</span> de <span class="num" id="numTotal">5</span></div>
 
-  <!-- Pestañas horizontales -->
   <nav class="opciones" id="tabs">
     <button class="activo" onclick="mostrar(this,'intro')">🏠 Introducción</button>
     <button onclick="mostrar(this,'objetivos')">🎯 Objetivos</button>
@@ -431,10 +427,8 @@
     <button onclick="mostrar(this,'conclusion')">🏁 Conclusión</button>
   </nav>
 
-  <!-- Panel -->
   <main class="panel" id="panel"></main>
 
-  <!-- Botones Anterior / Siguiente -->
   <div class="navegacion">
     <button class="btn-prev" id="btnPrev" onclick="anterior()">◀ Anterior</button>
     <button class="btn-next" id="btnNext" onclick="siguiente()">Siguiente ▶</button>
@@ -502,63 +496,48 @@
       conclusion: `
         <h2>🏁 Conclusión</h2>
         <p><strong>Innovatech Chat</strong> demuestra que es posible construir, desde cero, una plataforma web funcional que combine autenticación de usuarios, persistencia de datos e Inteligencia Artificial en tiempo real, todo con un diseño moderno y accesible desde cualquier dispositivo.</p>
-        <div class="dato"><span>🚀</span> Próximos pasos: despliegue en la nube, subida de archivos y modo oscuro</div>
-        <p>El proyecto no termina aquí. Entre las próximas mejoras están el <strong>despliegue en la nube</strong>, la <strong>subida de archivos al chat</strong> y un <strong>modo oscuro</strong> para la interfaz — pasos que llevarían a Innovatech Chat de un proyecto de feria a una herramienta lista para usarse todos los días.</p>
+        <div class="dato"><span>📱</span> Próximo paso: convertirla en app de acceso rápido para móviles</div>
+        <p>El proyecto no termina aquí. La siguiente meta es transformar Innovatech Chat en una <strong>aplicación de acceso rápido para móviles</strong>, instalable directamente desde el navegador, sin necesidad de abrirla como página web ni depender de una tienda de aplicaciones — ofreciendo una experiencia más ágil, cómoda y parecida a una app nativa.</p>
       `
     };
 
-    /* ===== ORDEN DE SECCIONES ===== */
     const orden = ['intro', 'objetivos', 'funcionamiento', 'resultados', 'conclusion'];
     let actual = 0;
 
-    /* ===== MOSTRAR SECCIÓN ===== */
     function mostrar(boton, clave) {
       if (navigator.vibrate) navigator.vibrate(8);
 
-      // Actualizar índice
       actual = orden.indexOf(clave);
       if (actual < 0) actual = 0;
 
-      // Marcar botón activo
       document.querySelectorAll('.opciones button').forEach(b => b.classList.remove('activo'));
       if (boton) boton.classList.add('activo');
 
-      // Guardar
       try { localStorage.setItem('pestanaActiva', clave); } catch(e) {}
 
-      // Mostrar contenido con animación
       const panel = document.getElementById('panel');
       panel.innerHTML = datos[clave];
       panel.classList.remove('reflow');
       void panel.offsetWidth;
       panel.classList.add('reflow');
 
-      // Actualizar indicador, barra y botones
       actualizarUI();
 
-      // Centrar botón activo
       if (boton) boton.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-
-      // Scroll al inicio del panel
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ===== ACTUALIZAR UI ===== */
     function actualizarUI() {
-      // Indicador
       document.getElementById('numActual').textContent = actual + 1;
       document.getElementById('numTotal').textContent = orden.length;
 
-      // Barra de progreso
       const porcentaje = ((actual + 1) / orden.length) * 100;
       document.getElementById('barraProgreso').style.width = porcentaje + '%';
 
-      // Botones
       document.getElementById('btnPrev').disabled = actual === 0;
       document.getElementById('btnNext').disabled = actual === orden.length - 1;
     }
 
-    /* ===== NAVEGACIÓN ===== */
     function anterior() {
       if (actual > 0) {
         const clave = orden[actual - 1];
@@ -575,7 +554,6 @@
       }
     }
 
-    /* ===== CARGA INICIAL ===== */
     window.addEventListener('DOMContentLoaded', () => {
       const botones = document.querySelectorAll('.opciones button');
       let clave = 'intro';
@@ -585,7 +563,6 @@
       mostrar(botones[actual], orden[actual]);
     });
 
-    /* ===== BOTÓN VOLVER ARRIBA ===== */
     const btnArriba = document.getElementById('btnArriba');
     window.addEventListener('scroll', () => {
       btnArriba.classList.toggle('visible', window.scrollY > 200);
