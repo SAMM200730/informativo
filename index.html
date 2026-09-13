@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#2563eb">
+  <title>Innovatech Chat · Proyecto</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul: #2563eb;
+      --violeta: #7c3aed;
+      --cian: #06b6d4;
+      --gradiente: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #06b6d4 100%);
+      --texto: #1f2430;
+      --texto-suave: #5b6472;
+      --tarjeta: rgba(255, 255, 255, 0.8);
+      --borde: rgba(255, 255, 255, 0.7);
+      --sombra: 0 8px 24px rgba(37, 99, 235, 0.15);
+      --fondo-1: #eef3fd;
+      --fondo-2: #f5eeff;
+      --verde: #10b981;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --texto: #f1f3f8;
+        --texto-suave: #a7b0c0;
+        --tarjeta: rgba(30, 34, 45, 0.7);
+        --borde: rgba(255, 255, 255, 0.08);
+        --sombra: 0 8px 24px rgba(0, 0, 0, 0.5);
+        --fondo-1: #0b1120;
+        --fondo-2: #150f26;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(160deg, var(--fondo-1) 0%, var(--fondo-2) 100%);
+      background-attachment: fixed;
+      color: var(--texto);
+      min-height: 100vh;
+      padding: calc(16px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
+      line-height: 1.55;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 18px 10px 24px;
+      animation: aparecer 0.6s ease both;
+    }
+
+    header .logo {
+      width: 66px; height: 66px;
+      margin: 0 auto 14px;
+      border-radius: 20px;
+      background: var(--gradiente);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: var(--sombra);
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: var(--gradiente);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--texto-suave);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .opciones {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 2px 16px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .opciones::-webkit-scrollbar { display: none; }
+
+    .opciones button {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      background: var(--tarjeta);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid var(--borde);
+      border-radius: 30px;
+      padding: 11px 18px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--texto);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .opciones button:active { transform: scale(0.94); }
+
+    .opciones button.activo {
+      background: var(--gradiente);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+    }
+
+    .panel {
+      background: var(--tarjeta);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--sombra);
+      min-height: 180px;
+    }
+
+    .panel.reflow { animation: aparecer 0.4s ease both; }
+
+    .panel h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--azul);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .panel h2 { color: #8ab4ff; }
+    }
+
+    .panel p, .panel li {
+      color: var(--texto-suave);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .panel ul { padding-left: 20px; margin: 8px 0 12px; }
+    .panel li { margin-bottom: 8px; }
+
+    .panel code {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--azul);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .panel code { color: #8ab4ff; background: rgba(138, 180, 255, 0.15); }
+    }
+
+    .dato {
+      background: var(--gradiente);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 14px;
+      margin: 14px 0;
+      font-weight: 600;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--sombra);
+    }
+
+    .dato span { font-size: 1.4rem; flex-shrink: 0; }
+
+    /* Flujo paso a paso */
+    .pasos {
+      counter-reset: paso;
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .pasos li {
+      counter-increment: paso;
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 10px;
+      color: var(--texto-suave);
+    }
+
+    .pasos li::before {
+      content: counter(paso);
+      position: absolute;
+      left: 0; top: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--gradiente);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(124, 58, 237, 0.3);
+    }
+
+    .arquitectura {
+      background: rgba(37, 99, 235, 0.08);
+      border-left: 4px solid var(--azul);
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: var(--texto);
+      margin: 12px 0;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .arquitectura { background: rgba(138, 180, 255, 0.1); }
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--texto-suave);
+      font-size: 0.95rem;
+    }
+
+    .check .icono-check {
+      color: var(--verde);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    .check strong { color: var(--texto); font-weight: 600; }
+
+    .arriba {
+      position: fixed;
+      right: 18px;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gradiente);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 20;
+    }
+
+    .arriba.visible { opacity: 1; pointer-events: auto; }
+    .arriba:active { transform: scale(0.9); }
+
+    footer {
+      text-align: center;
+      color: var(--texto-suave);
+      font-size: 0.78rem;
+      margin-top: 26px;
+      padding-bottom: 10px;
+      font-weight: 500;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🤖</div>
+    <h1>Innovatech Chat</h1>
+    <p>Plataforma web de inteligencia artificial</p>
+  </header>
+
+  <nav class="opciones">
+    <button class="activo" onclick="mostrar(this,'intro')">🏠 Introducción</button>
+    <button onclick="mostrar(this,'objetivos')">🎯 Objetivos</button>
+    <button onclick="mostrar(this,'funcionamiento')">⚙️ Funcionamiento</button>
+    <button onclick="mostrar(this,'resultados')">📊 Resultados</button>
+    <button onclick="mostrar(this,'conclusion')">🏁 Conclusión</button>
+  </nav>
+
+  <main class="panel" id="panel"></main>
+
+  <button class="arriba" id="btnArriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <footer>© 2025 Innovatech Chat · Proyecto informativo</footer>
+
+  <script>
+    /* ===== CONTENIDO REAL DEL PROYECTO ===== */
+    const datos = {
+      intro: `
+        <h2>🏠 Introducción</h2>
+        <p><strong>Innovatech Chat</strong> es un asistente conversacional que responde en tiempo real usando <strong>Inteligencia Artificial</strong>. Permite a cada usuario crear su cuenta, chatear con la IA y conservar el historial completo de sus conversaciones, todo desde una interfaz moderna que funciona igual de bien en computadora que en el celular.</p>
+        <p>Desarrollado con <strong>Django</strong> y potenciado por la <strong>API de Groq</strong> (modelo Llama), este proyecto nace como una demostración práctica de cómo integrar tecnologías web modernas con servicios de Inteligencia Artificial.</p>
+        <div class="dato"><span>💡</span> Un asistente IA accesible desde cualquier navegador</div>
+      `,
+
+      objetivos: `
+        <h2>🎯 Objetivos</h2>
+        <ul>
+          <li>Diseñar una interfaz web sencilla e intuitiva.</li>
+          <li>Integrar un modelo de lenguaje que responda consultas en tiempo real.</li>
+          <li>Ofrecer respuestas rápidas y útiles al usuario.</li>
+          <li>Garantizar el acceso desde dispositivos móviles.</li>
+          <li>Guardar el historial de cada conversación de forma segura y personalizada.</li>
+        </ul>
+        <div class="dato"><span>🎯</span> Meta: un asistente útil, rápido y fácil de usar</div>
+      `,
+
+      funcionamiento: `
+        <h2>⚙️ Funcionamiento</h2>
+        <p>El sistema sigue una arquitectura <strong>MVT (Modelo–Vista–Template)</strong> de Django, dividida en cuatro capas:</p>
+        <div class="arquitectura">
+          Usuario (navegador)<br>
+          &nbsp;&nbsp;↓<br>
+          Frontend (HTML, CSS, JS)<br>
+          &nbsp;&nbsp;↓<br>
+          Backend (Django)<br>
+          &nbsp;&nbsp;↓<br>
+          Base de datos (SQLite) ↔ API Groq (IA)
+        </div>
+        <p><strong>Así viaja cada mensaje:</strong></p>
+        <ol class="pasos">
+          <li>Escribes tu mensaje en el chat.</li>
+          <li>JavaScript lo envía al servidor sin recargar la página.</li>
+          <li>Django lo guarda en la base de datos.</li>
+          <li>Django lo envía, junto al historial, a la API de Groq.</li>
+          <li>Groq genera la respuesta con el modelo Llama.</li>
+          <li>Django la guarda y la devuelve al navegador.</li>
+          <li>Se muestra en pantalla con formato <strong>Markdown</strong>, lista para leer.</li>
+        </ol>
+      `,
+
+      resultados: `
+        <h2>📊 Resultados</h2>
+        <div class="check"><span class="icono-check">✅</span><div><strong>Chat en tiempo real</strong> — respuestas fluidas sin recargar la página.</div></div>
+        <div class="check"><span class="icono-check">✅</span><div><strong>Historial persistente</strong> — cada conversación queda guardada y organizada por usuario.</div></div>
+        <div class="check"><span class="icono-check">✅</span><div><strong>100% responsive</strong> — misma experiencia en computadora, tablet y celular.</div></div>
+        <div class="check"><span class="icono-check">✅</span><div><strong>Extras funcionales</strong> — lectura en voz alta, exportación a PDF y renderizado de Markdown.</div></div>
+        <div class="check"><span class="icono-check">✅</span><div><strong>Seguridad</strong> — autenticación de usuarios, contraseñas encriptadas y protección CSRF.</div></div>
+      `,
+
+      conclusion: `
+        <h2>🏁 Conclusión</h2>
+        <p><strong>Innovatech Chat</strong> demuestra que es posible construir, desde cero, una plataforma web funcional que combine autenticación de usuarios, persistencia de datos e Inteligencia Artificial en tiempo real, todo con un diseño moderno y accesible desde cualquier dispositivo.</p>
+        <div class="dato"><span>🚀</span> Próximos pasos: despliegue en la nube, subida de archivos y modo oscuro</div>
+        <p>El proyecto no termina aquí. Entre las próximas mejoras están el <strong>despliegue en la nube</strong>, la <strong>subida de archivos al chat</strong> y un <strong>modo oscuro</strong> para la interfaz — pasos que llevarían a Innovatech Chat de un proyecto de feria a una herramienta lista para usarse todos los días.</p>
+      `
+    };
+
+    function mostrar(boton, clave) {
+      if (navigator.vibrate) navigator.vibrate(10);
+      document.querySelectorAll('.opciones button').forEach(b => b.classList.remove('activo'));
+      boton.classList.add('activo');
+      try { localStorage.setItem('pestanaActiva', clave); } catch(e) {}
+
+      const panel = document.getElementById('panel');
+      panel.innerHTML = datos[clave];
+      panel.classList.remove('reflow');
+      void panel.offsetWidth;
+      panel.classList.add('reflow');
+
+      boton.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const botones = document.querySelectorAll('.opciones button');
+      let clave = 'intro';
+      try { clave = localStorage.getItem('pestanaActiva') || 'intro'; } catch(e) {}
+      const idx = Object.keys(datos).indexOf(clave);
+      mostrar(botones[idx >= 0 ? idx : 0], datos[clave] ? clave : 'intro');
+    });
+
+    const btnArriba = document.getElementById('btnArriba');
+    window.addEventListener('scroll', () => {
+      btnArriba.classList.toggle('visible', window.scrollY > 200);
+    });
+  </script>
+
+</body>
+</html>
